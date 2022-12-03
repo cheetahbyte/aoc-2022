@@ -1,25 +1,14 @@
 
-def content(file: str) -> str:
-    with open(file) as f:
-        return f.read()
+def content():
+    with open("inputs/01.txt") as f:
+        return sorted([*map(sum, (map(int, x.splitlines()) for x in f.read().split('\n\n')))], reverse=True)
 
-c = content("inputs/01.txt").splitlines()
-count: int = 0
-content = []
-l = []
-while count < len(c):
-    if c[count] == "":
-        content.append(l)
-        l = []
-    else:
-        l.append(int(c[count]))
-    count += 1
 
 def part_1() -> None:
-    return max([sum(elem) for elem in content])
+    return max(content())
 
 def part_2() -> None:
-    return sum(sorted([sum(elem) for elem in content], reverse=True)[:3])
+    return sum(content()[:3])
 
 if __name__ == "__main__":
     print("Part 1:", part_1())
