@@ -1,4 +1,4 @@
-with open("inputs/04.txt") as f:
+with open("inputs/04-maik.txt") as f:
     _lines = f.readlines()
     _pairs = []
     content = []
@@ -11,11 +11,10 @@ with open("inputs/04.txt") as f:
 def part_1(c) -> int:
     counter: int = 0
     for pair in c:
-        range_a = list(range(pair[0][0], pair[0][1])) if pair[0][0] != pair[0][1] else [pair[0][0]]
-        range_b = list(range(pair[1][0], pair[1][1])) if pair[1][0] != pair[1][1] else [pair[1][0]]
-        check_b_in_a = all(n in range_a for n in range_b)
-        check_a_in_b = all(n in range_b for n in range_a)
-        if check_a_in_b or check_b_in_a:
+        a,b = pair
+        if a[0] <= b[0] and a[1] >= b[1]:
+            counter += 1
+        elif b[0] <= a[0] and b[1] >= a[1]:
             counter += 1
     return counter
 
